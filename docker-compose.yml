@@ -7,8 +7,8 @@ services:
     container_name: security_db
     environment:
       MYSQL_DATABASE: 'security-db'
-      MYSQL_USER: 'emirhan'
-      MYSQL_PASSWORD: 'usta'
-      MYSQL_ROOT_PASSWORD: 'ustaroot'
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: 'mysql'
+      MYSQL_ROOT_PASSWORD: 'mysql'
     ports:
       - '3306:3306'
