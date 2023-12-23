@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  db:
+    image: mysql
+    restart: always
+    container_name: security_db
+    environment:
+      MYSQL_DATABASE: 'security-db'
+      MYSQL_USER: 'emirhan'
+      MYSQL_PASSWORD: 'usta'
+      MYSQL_ROOT_PASSWORD: 'ustaroot'
+    ports:
+      - '3306:3306'
