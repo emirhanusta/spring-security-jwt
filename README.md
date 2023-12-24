@@ -33,9 +33,8 @@ The project is organized into several packages:
 
 ### Prerequisites
 
-Make sure you have Docker installed on your machine:
+Make sure you have Docker or Maven and Mysql installed on your machine:
 
-- [Docker](https://docs.docker.com/get-docker/)
 
 ### Build with Docker
 
@@ -48,13 +47,35 @@ Make sure you have Docker installed on your machine:
 2. Navigate to the project directory:
 
     ```bash
-    cd /path/to/your/project
+    cd spring-security-jwt
     ```
 
 3. Run Docker Compose to start MySQL and the Spring Boot application:
 
     ```bash
     docker-compose up -d
+    ```
+
+    
+### Build with Maven
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/emirhanusta/spring-security-jwt.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd spring-security-jwt
+    ```
+
+3. Run the Spring Boot application:
+
+    ```bash
+    mvn clean install
+    mvn spring-boot:run
     ```
 
 
