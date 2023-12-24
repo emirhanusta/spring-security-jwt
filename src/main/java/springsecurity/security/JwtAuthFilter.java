@@ -20,12 +20,26 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final TokenService tokenService;
     private final UserDetailsServiceImpl userDetailsService;
 
+    /**
+     * Constructs a new {@code JwtAuthFilter} with the specified {@link TokenService} and {@link UserDetailsServiceImpl}.
+     *
+     * @param tokenService The {@link TokenService} used for handling JWT tokens.
+     * @param userDetailsService The {@link UserDetailsServiceImpl} used for loading user details.
+     */
     public JwtAuthFilter(TokenService tokenService, UserDetailsServiceImpl userDetailsService) {
         this.tokenService = tokenService;
         this.userDetailsService = userDetailsService;
     }
 
-
+    /**
+     * Processes each HTTP request, extracts the JWT token, validates it, and sets the authentication in the security context.
+     *
+     * @param request The {@link HttpServletRequest} representing the incoming HTTP request.
+     * @param response The {@link HttpServletResponse} to be populated with the handled response.
+     * @param filterChain The {@link FilterChain} for continuing the filter chain.
+     * @throws ServletException if a servlet-related error occurs.
+     * @throws IOException if an I/O error occurs.
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,

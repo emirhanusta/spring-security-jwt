@@ -30,6 +30,13 @@ public class SecurityConfig {
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
+    /**
+     * Configures the security filter chain for handling various aspects of Spring Security.
+     *
+     * @param http The {@link HttpSecurity} object to configure.
+     * @return A {@link SecurityFilterChain} configured with the specified settings.
+     * @throws Exception if an error occurs during configuration.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -56,6 +63,11 @@ public class SecurityConfig {
                 .build();
     }
 
+    /**
+     * Configures an {@link AuthenticationProvider} for Dao-based authentication.
+     *
+     * @return An instance of {@link AuthenticationProvider}.
+     */
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -64,9 +76,15 @@ public class SecurityConfig {
         return authenticationProvider;
     }
 
+    /**
+     * Configures an {@link AuthenticationManager} for handling authentication requests.
+     *
+     * @param configuration The {@link AuthenticationConfiguration} used to obtain the authentication manager.
+     * @return An instance of {@link AuthenticationManager}.
+     * @throws Exception if an error occurs during configuration.
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
-
 }

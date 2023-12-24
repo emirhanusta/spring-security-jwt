@@ -23,32 +23,38 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
 
-
+    /**
+     * Registers a new user based on the provided registration request.
+     *
+     * @param request The {@link RegisterRequest} containing user registration details.
+     * @return A {@link UserResponse} representing the registered user.
+     * @throws UserAlreadyExistException if the username already exists.
+     */
     public UserResponse register(RegisterRequest request) {
         if (userService.existsByUsername(request.username())) {
             throw new UserAlreadyExistException("Username already exists");
         }
-        User user = userService.saveUser(User.builder()
+        return userService.saveUser(User.builder()
                 .username(request.username())
                 .password(passwordEncoder.encode(request.password()))
                 .role(Role.valueOf(request.role()))
                 .build());
-        return UserResponse.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .role(user.getRole().name())
-                .build();
     }
 
+    /**
+     * Authenticates a user based on the provided login request.
+     *
+     * @param request The {@link LoginRequest} containing user login details.
+     * @return A {@link TokenResponse} containing the user and generated authentication token.
+     * @throws BadCredentialsException if the provided credentials are incorrect.
+     */
     public TokenResponse login(LoginRequest request) {
-        User user = userService.findByUsername(request.username());
+        UserResponse userResponse = userService.findByUsername(request.username());
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.username(), request.password()));
             return TokenResponse.builder()
-                    .id(user.getId())
-                    .username(request.username())
-                    .role(user.getRole().name())
+                    .user(userResponse)
                     .token(tokenService.generateToken(request.username()))
                     .build();
         } catch (BadCredentialsException e) {
