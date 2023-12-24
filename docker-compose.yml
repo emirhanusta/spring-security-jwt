@@ -12,3 +12,28 @@ services:
       MYSQL_ROOT_PASSWORD: 'mysql'
     ports:
       - '3306:3306'
+    networks:
+      - shared-network
+
+
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    container_name: security_app
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/security-db
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: mysql
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create
+    networks:
+        - shared-network
+
+networks:
+  shared-network:
+    driver: bridge
