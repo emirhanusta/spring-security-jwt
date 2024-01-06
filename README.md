@@ -21,12 +21,12 @@ This project showcases the implementation of Spring Security in a Spring Boot ap
 The project is organized into several packages:
 
 - `controller`: Contains the controllers for handling authentication and authorization endpoints.
-- `config`: Includes configuration classes, such as Spring Security configuration and password encoder configuration.
+- `config`: Includes configuration class password encoder configuration.
 - `exception`: Holds custom exception classes.
 - `dto`: Contains Data Transfer Objects (DTOs) used for data transfer.
 - `model`: Defines the User and Role entities.
 - `repository`: Contains the UserRepository interface for database operations.
-- `security`: Includes classes related to security, such as JWT filter, authentication entry point, and access denied handler.
+- `security`: Includes classes related to security, such as JWT filter, authentication entry point, access denied handler and Spring Security configuration.
 - `service`: Implements services for user registration, login, and user details retrieval.
 
 ## Setup
